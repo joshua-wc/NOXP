@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyBehaviour : MonoBehaviour
 {
 
     public float speed;
     public Rigidbody ourRigidBody;
+    public NavMeshAgent navAgent;
 
 
     // Start is called before the first frame update
@@ -14,6 +16,8 @@ public class EnemyBehaviour : MonoBehaviour
     {
         
         ourRigidBody = GetComponent<Rigidbody>();
+        navAgent = GetComponent<NavMeshAgent>();
+        navAgent.speed = speed;
     }
 
     // Update is called once per frame
@@ -29,7 +33,8 @@ public class EnemyBehaviour : MonoBehaviour
         if (References.thePlayer != null)
         {
 
-
+            navAgent.destination = References.thePlayer.transform.position;
+            /*
             Vector3 playerPosition = References.thePlayer.transform.position;
             Vector3 vectorToPlayer = playerPosition - transform.position;
             ourRigidBody.velocity = vectorToPlayer.normalized * speed;
@@ -37,7 +42,7 @@ public class EnemyBehaviour : MonoBehaviour
             transform.LookAt(playerPositionAtOurHeight);
 
             // Follow the player
-
+            */
 
 
         }
